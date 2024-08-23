@@ -4,11 +4,14 @@ const Player = ({ name, symbol }) => {
   const [isEditing, setIsEditing] = useState(false);
  
   const handleEditClick = () => {
-    setIsEditing(!isEditing);
+    setIsEditing(editing => !editing);
   };
 
-  let playerName = isEditing ? <input type="text" required/> : <span className="player-name">{name}</span>
-   
+  let playerName = <span className="player-name">{name}</span>
+
+  if(isEditing) {
+    playerName = <input value = {name} type="text" required/>
+  }
 
   return (
     <li>
@@ -16,7 +19,7 @@ const Player = ({ name, symbol }) => {
         {playerName}
         <span className="player-symbol">{symbol}</span>
       </span>
-      <button onClick={handleEditClick}>Edit</button>
+      <button onClick={handleEditClick}>{isEditing? "Save" :"Edit"}</button>
     </li>
   );
 };
